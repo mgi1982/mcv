@@ -275,38 +275,39 @@ install_binaries() {
 
 bind_normal() {
     cd $HOME
-    for i in $(ls -1 "$PRIMARY_SYNC_FOLDER" | grep -v dotfiles)
+    ls -1 "$PRIMARY_SYNC_FOLDER" | grep -v dotfiles | while read i
     do
         if [ ! -L "$i" ] ; then
             if [ -d "$i" ] ; then
-                sudo mv $i $i.bak-$(date +%Y%m%d)
+                sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
             fi
             echo "Binding $i"
-            ln -s "$PRIMARY_SYNC_FOLDER/$i" "$i"
+            ln -s "$PRIMARY_SYNC_FOLDER/$i"
         fi
     done
-    for i in $(ls -1 "$SECONDARY_SYNC_FOLDER" | grep -v dotfiles)
+    ls -1 "$SECONDARY_SYNC_FOLDER" | grep -v dotfiles | while read i
     do
         if [ ! -L "$i" ] ; then
             if [ -d "$i" ] ; then
-                sudo mv $i $i.bak-$(date +%Y%m%d)
+                echo sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
             fi
             echo "Binding $i"
-            ln -s "$SECONDARY_SYNC_FOLDER/$i" "$i"
+            ln -s "$SECONDARY_SYNC_FOLDER/$i"
         fi
     done
 }
 
 bind_dotfiles() {
     cd $HOME
-    for i in $(ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles")
+    ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles" | while read i
     do
+        echo entraste a $i
         if [ ! -L ".$i" ] ; then
             if [ -f ".$i" ] ; then
-                sudo mv .$i .$i.bak-$(date +%Y%m%d)
+                sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
             fi
-            if [ -d "$i" ] ; then
-                sudo mv $i $i.bak-$(date +%Y%m%d)
+            if [ -d ".$i" ] ; then
+                sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
             fi
             echo "Binding $i to .$i"
             ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" ".$i"
@@ -327,11 +328,11 @@ do
     key="$1"
     case $key in
         -p|--primary)
-            PRIMARY_SYNC_FOLDER=$(realpath "$2")
+            PRIMARY_SYNC_FOLDER="$2"
             shift
             ;;
         -s|--secondary)
-            SECONDARY_SYNC_FOLDER=$(realpath "$2")
+            SECONDARY_SYNC_FOLDER="$2"
             shift
             ;;
         -b|--branch)
