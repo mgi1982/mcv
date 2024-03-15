@@ -19,6 +19,9 @@ upgrade_bash() {
 install_git_repos() {
     echo About to install git repos
     cd $HOME
+    if [ ! -f "$HOME/.mcv/.git/index" ] ; then
+        git clone --depth=1 -b $BRANCH  https://github.com/mgi1982/mcv.git $HOME/.mcv
+    fi
     if [ ! -f "$HOME/.oh-my-zsh/.git/index" ] ; then
         echo "Installing oh-my-zsh"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -28,7 +31,8 @@ install_git_repos() {
         if [ -f "$HOME/.zshrc" ] ; then
             mv .zshrc{,.bak-$(date +%Y%m%d)}
         fi
-        wget -O $HOME/.zshrc "https://raw.githubusercontent.com/mgi1982/mcv/${BRANCH}/configs/zshrc"
+        ln -s $HOME/.mcv/configs/zshrc $HOME/.zshrc
+        ln -s $HOME/.mcv/configs/p10k.zsh $HOME/.p10k.zsh
     fi
 
     if [ ! -f "$HOME/.vim_runtime/.git/index" ] ; then
@@ -49,14 +53,14 @@ install_git_repos() {
         if [ -f "$HOME/.vimrc" ] ; then
             mv .vimrc{,.bak-$(date +%Y%m%d)}
         fi
-        wget -O $HOME/.vimrc "https://raw.githubusercontent.com/mgi1982/mcv/${BRANCH}/configs/vimrc"
+        ln -s $HOME/.mcv/configs/vimrc $HOME/.vimrc
     fi
 
     cd
     if [ ! -f "$HOME/.tmux/.git/index" ] ; then
         git clone --depth=1 https://github.com/gpakosz/.tmux.git "$HOME/.tmux"
         ln -s ".tmux/.tmux.conf" ".tmux.conf"
-        wget -O $HOME/.tmux.conf.local "https://raw.githubusercontent.com/mgi1982/mcv/${BRANCH}/configs/tmux.conf.local"
+        ln -s $HOME/.mcv/configs/tmux.conf.local $HOME/.tmux.conf.local
     fi
 }
 
@@ -353,8 +357,8 @@ if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
 fi
 
 upgrade_bash
-install_binaries
 install_node
+install_binaries
 install_git_repos
 
 bind_normal
