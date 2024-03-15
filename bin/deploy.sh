@@ -20,7 +20,7 @@ install_git_repos() {
     echo About to install git repos
     cd $HOME
     if [ ! -f "$HOME/.mcv/.git/index" ] ; then
-        git clone --depth=1 -b $BRANCH  https://github.com/mgi1982/mcv.git $HOME/.mcv
+        git clone --depth=1 -b $BRANCH git@github.com:/mgi1982/mcv.git $HOME/.mcv
     fi
     if [ ! -f "$HOME/.oh-my-zsh/.git/index" ] ; then
         echo "Installing oh-my-zsh"
