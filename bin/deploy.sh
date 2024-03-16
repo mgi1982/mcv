@@ -41,6 +41,9 @@ install_git_repos() {
         sh $HOME/.vim_runtime/install_awesome_vimrc.sh
         cd $HOME/.vim_runtime/my_plugins
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
+        if [[ $(uname -a | grep Kali) ]] ; then
+            sudo apt install -y golang cmake
+        fi
         cd YouCompleteMe
         git submodule update --init --recursive
         python3 install.py --ts-completer --go-completer
