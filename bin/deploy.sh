@@ -277,6 +277,7 @@ install_binaries() {
         done
         [[ ! -z "${TOINSTALL}" ]] && pamac build --no-confirm ${TOBUILD}
     fi
+    echo
 }
 
 bind_normal() {
@@ -313,7 +314,6 @@ bind_dotfiles() {
     if [ -d "$SECONDARY_SYNC_FOLDER" ] ; then
         ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles" | while read i
         do
-            echo entraste a $i
             if [ ! -L ".$i" ] ; then
                 if [ -f ".$i" ] ; then
                     sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
