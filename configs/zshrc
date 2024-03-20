@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 autoload -U zmv
 alias mmv='noglob zmv -W'
 
-source $HOME/.profile
+[[ -f $HOME/.profile ]] && source $HOME/.profile
 
 if [[ "Darwin" == `uname -s` ]] ; then
     export NVM_DIR="$HOME/.nvm"
