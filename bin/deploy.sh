@@ -40,6 +40,10 @@ install_git_repos() {
         git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
         sh $HOME/.vim_runtime/install_awesome_vimrc.sh
         cd $HOME/.vim_runtime/my_plugins
+        git clone --depth=1 https://github.com/christoomey/vim-tmux-navigator.git
+        git clone --depth=1 https://github.com/hashivim/vim-terraform.git
+        git clone --depth=1 https://github.com/johngrib/vim-game-code-break.git
+        git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake
