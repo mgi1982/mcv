@@ -48,6 +48,8 @@ install_git_repos() {
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
+        elif [[ $(uname -a | grep MANJARO) ]] ; then
+            sudo pacman -Sy cmake
         fi
         cd YouCompleteMe
         git submodule update --init --recursive
