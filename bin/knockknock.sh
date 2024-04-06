@@ -11,18 +11,18 @@ fi
 function knock() {
     CMD=$(which curl)
     if [ ! -z "$CMD" ] ; then
-        CMD="$CMD --connect-timeout 0.1 $HOST:$PORT"
-    else 
+        CMD="$CMD -q --connect-timeout 0.1 $HOST:$PORT"
+    else
         CMD=$(which nc)
         if [ ! -z "$CMD" ] ; then
             CMD="$CMD -G 1 $HOST $PORT"
-        else 
+        else
             CMD=$(which wget)
             if [ ! -z "$CMD" ] ; then
                 CMD="$CMD -t 1 --timeout=0.1 $HOST:$PORT"
-            fi 
-        fi 
-    fi 
+            fi
+        fi
+    fi
 
     if [ -z "$CMD" ] ; then
         echo "No command available to knock. Exiting"
@@ -35,5 +35,5 @@ function knock() {
 echo "Knock Knock $HOST"
 for PORT in $PORTS
 do
-    knock
+    knock 2> /dev/null
 done
