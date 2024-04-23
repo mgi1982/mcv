@@ -49,7 +49,7 @@ install_git_repos() {
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
-            sudo pacman -Sy cmake go
+            sudo pacman -Sy --noconfirm cmake go make base-devel
         fi
         cd YouCompleteMe
         git submodule update --init --recursive
@@ -282,7 +282,7 @@ install_binaries() {
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
         done
-        [[ ! -z "${TOINSTALL}" ]] && pamac build --no-confirm ${TOBUILD}
+        [[ ! -z "${TOBUILD}" ]] && yes | pamac build --no-confirm ${TOBUILD}
     fi
     echo
 }
@@ -369,10 +369,10 @@ do
 done
 
 if [ ! -d "$PRIMARY_SYNC_FOLDER" ] ; then
-    echo "Primary sync folder not defined, skip not binding"
+    echo "Primary sync folder not defined, skip binding"
 fi
 if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
-    echo "Secondary sync folder not defined, skip not binding"
+    echo "Secondary sync folder not defined, skip binding"
 fi
 
 upgrade_bash
