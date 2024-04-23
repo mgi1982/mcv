@@ -98,9 +98,8 @@ if [[ "Darwin" == `uname -s` ]] ; then
     bindkey '\e\e[C' forward-word
     #alias python=/usr/local/bin/python3
 else
-    [[ -f /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh
-    # Open new tab in current directory
-    [[ -f /etc/profile.d/vte.sh ]] && . /etc/profile.d/vte.sh
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 fi
 
 # Vi mode baby! https://dougblack.io/words/zsh-vi-mode.html
