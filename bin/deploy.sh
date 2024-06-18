@@ -147,8 +147,8 @@ install_binaries() {
         CASK[microsoft-remote-desktop]=microsoft-remote-desktop
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
-        CASK[responsively]=responsively
         CASK[utm]=utm
+        CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
