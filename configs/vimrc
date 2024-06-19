@@ -108,6 +108,5 @@ com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom
 
 " Ripgrep integration from https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
 if executable("rg")
-  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
-  set grepformat=%f:%l:%c:%m
+  let g:ackprg = 'rg --vimgrep --smart-case --hidden'
 endif
