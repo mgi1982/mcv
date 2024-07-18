@@ -105,6 +105,9 @@ fi
 # Vi mode baby! https://dougblack.io/words/zsh-vi-mode.html
 bindkey -v
 
+# man zshzle for more ZSH line editing widgets like up-history, backward-kill-word, etc. See below for sample mappings
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^?' backward-delete-char
