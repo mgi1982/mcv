@@ -149,8 +149,9 @@ install_binaries() {
         CASK[microsoft-remote-desktop]=microsoft-remote-desktop
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
-        CASK[responsively]=responsively
         CASK[utm]=utm
+        CASK[delta]=git-delta
+        CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -212,6 +213,7 @@ install_binaries() {
         APT[yq]=yq
         APT[ksnip]=ksnip
         APT[go]=golang
+        APT[delta]=git-delta
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
         done
@@ -262,6 +264,7 @@ install_binaries() {
         PACMAN[ksnip]=ksnip
         PACMAN[patch]=patch
         PACMAN[make]=make
+        PACMAN[delta]=git-delta
         for i in "${!PACMAN[@]}" ; do
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
