@@ -46,6 +46,8 @@ install_git_repos() {
         git clone --depth=1 https://github.com/johngrib/vim-game-code-break.git
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
+        git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
+        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
@@ -138,7 +140,7 @@ install_binaries() {
         CASK[discord]=discord
         CASK[gimp]=gimp
         CASK[basecamp]=basecamp
-        CASK[clipy]=clipy
+        CASK[maccy]=maccy
         CASK[calibre]=calibre
         CASK[spotify]=spotify
         CASK[zoom]=zoom
@@ -148,6 +150,7 @@ install_binaries() {
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
         CASK[utm]=utm
+        CASK[delta]=git-delta
         CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
@@ -210,6 +213,7 @@ install_binaries() {
         APT[yq]=yq
         APT[ksnip]=ksnip
         APT[go]=golang
+        APT[delta]=git-delta
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
         done
@@ -260,6 +264,7 @@ install_binaries() {
         PACMAN[ksnip]=ksnip
         PACMAN[patch]=patch
         PACMAN[make]=make
+        PACMAN[delta]=git-delta
         for i in "${!PACMAN[@]}" ; do
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
@@ -272,7 +277,6 @@ install_binaries() {
         PAMAC[mycli]=mycli-git
         PAMAC[spotify]=spotify
         PAMAC[insync]=insync
-        PAMAC[signal-desktop-beta]=signal-desktop-beta-bin
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
         PAMAC[zeal]=zeal
