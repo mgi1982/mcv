@@ -47,7 +47,6 @@ install_git_repos() {
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
-        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
@@ -56,6 +55,7 @@ install_git_repos() {
         cd YouCompleteMe
         git submodule update --init --recursive
         python3 install.py --ts-completer --go-completer
+        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         GNAME="$USER"
         if [[ "Darwin" == $(uname -s) ]] ; then
             GNAME="staff"
