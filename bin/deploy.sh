@@ -124,6 +124,7 @@ install_binaries() {
         BREW[figlet]=figlet
         BREW[yq]=yq
         BREW[pbzip2]=pbzip2
+        BREW[delta]=git-delta
         for i in "${!BREW[@]}" ; do
             which -s "$i" 1> /dev/null || TOBREW="${TOBREW} ${BREW[$i]}"
         done
@@ -150,7 +151,6 @@ install_binaries() {
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
         CASK[utm]=utm
-        CASK[delta]=git-delta
         CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
