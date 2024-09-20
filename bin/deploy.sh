@@ -275,13 +275,14 @@ install_binaries() {
         PAMAC[zoom]=zoom
         PAMAC[lando]=lando-bin
         PAMAC[mycli]=mycli-git
-        PAMAC[spotify]=spotify
         PAMAC[insync]=insync
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
         PAMAC[zeal]=zeal
         PAMAC[buttercup]=buttercup-desktop
         PAMAC[imgcat]=imgcat
+        PAMAC[ferdium]=ferdium
+        PAMAC[zed]=zed
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
