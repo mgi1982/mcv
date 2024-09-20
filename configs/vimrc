@@ -15,8 +15,7 @@ try
     source ~/.vim_local/matchit.vim
 
     "Themes
-    source ~/.vim_local/themes/Tomorrow-Night.vim
-    colorscheme Tomorrow-Night
+    colorscheme desert 
 catch
     "No .vim_local, no problem
 endtry

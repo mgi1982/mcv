@@ -334,7 +334,7 @@ bind_dotfiles() {
                     sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
                 fi
                 echo "Binding $i to .$i"
-                ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" ".$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" "$HOME/.$i"
             fi
         done
     fi
@@ -346,7 +346,24 @@ bind_dotfiles() {
 
     if [ -d .gnupg ] ; then
         echo "Fixing .gnupg permissions"
-        chmod 0700 .gnupg
+        chmod 0700 $HOME/.gnupg
+    fi
+
+    if [ -d .config/zed ] ; then
+        echo "Binding ZED files"
+        ls -1 "$PRIMARY_SYNC_FOLDER/zed" | while read i
+        do
+            if [ ! -L ".$i" ] ; then
+                if [ -f ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                if [ -d ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                echo "Binding $i to .config/zed/$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/zed/$i" "$HOME/.config/zed/$i"
+            fi
+        done
     fi
 }
 
@@ -375,6 +392,9 @@ done
 
 if [ ! -d "$PRIMARY_SYNC_FOLDER" ] ; then
     echo "Primary sync folder not defined, skip binding"
+else
+    PRIMARY_SYNC_FOLDER="$(readlink -f $PRIMARY_SYNC_FOLDER)"
+    echo "Using $PRIMARY_SYNC_FOLDER as primary sync folder"
 fi
 if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
     echo "Secondary sync folder not defined, skip binding"
