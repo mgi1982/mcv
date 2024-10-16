@@ -151,6 +151,7 @@ install_binaries() {
         CASK[responsively]=responsively
         CASK[utm]=utm
         CASK[dash]=dash
+        CASK[ferdium]=ferdium
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
