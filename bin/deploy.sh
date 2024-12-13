@@ -153,7 +153,7 @@ install_binaries() {
         CASK[dash]=dash
         CASK[ferdium]=ferdium
         CASK[zed]=zed
-        CASK[localsend]=localsend-bin
+        CASK[localsend-bin]=localsend
         CASK[tsh]=teleport
         for i in "${!CASK[@]}"
         do
