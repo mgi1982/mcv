@@ -1,0 +1,106 @@
+set runtimepath+=~/.vim_runtime
+
+source ~/.vim_runtime/vimrcs/basic.vim
+source ~/.vim_runtime/vimrcs/filetypes.vim
+source ~/.vim_runtime/vimrcs/plugins_config.vim
+source ~/.vim_runtime/vimrcs/extended.vim
+
+try
+    "source ~/.vim_local/wordpress.vim
+    source ~/.vim_local/indent/2spaces.vim
+    source ~/.vim_local/drupal.vim
+    source ~/.vim_local/js.vim
+    call pathogen#infect('~/.vim_local/bundle/{}')
+
+    source ~/.vim_local/matchit.vim
+
+    "Themes
+    colorscheme desert 
+catch
+    "No .vim_local, no problem
+endtry
+
+" set clipboard=unnamed "share clipboard with osx
+set clipboard^=unnamed,unnamedplus
+set rnu "enable relative line numbers
+set nu "enable regular line numberes
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+"Control C swaps between relative and absolute line numbers
+nnoremap <C-c> :call NumberToggle()<cr> 
+
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.1)<cr>
+nnoremap <silent> N   N:call HLNext(0.1)<cr>
+
+function! HLNext (blinktime)
+    highlight WhiteOnRed ctermfg=white ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#\%('.@/.'\)'
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+"Folding initialization
+set foldmethod=syntax
+set foldcolumn=1
+let javaScript_fold=1
+set foldlevelstart=99
+
+"Better split manipulation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <M-J> :res +2
+nnoremap <M-K> :res -2
+nnoremap <M-L> :vertical resize +2
+nnoremap <M-H> :vertical resize -2
+
+"Paint red background over column 80
+highlight 120s ctermbg=red 
+highlight 80s ctermbg=magenta 
+call matchadd('80s', '\%81v', 100)
+call matchadd('120s', '\%121v', 100)
+
+"TagBar Toggle
+map <leader>t :TagbarToggle<cr> 
+
+"Scrollbind toggle
+map <leader>b :set scb!<cr>
+
+"Mastering vim quickil
+set cursorline
+
+"English and Spanish spellcheck
+"set spell
+"set spelllang=en,es
+set visualbell
+set title
+
+"Ignore files/folders from .gitignore for ctrl-p
+"https://github.com/ctrlpvim/ctrlp.vim
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+"Use YCM to go to definition
+nnoremap <C-]> :YcmCompleter GoTo<CR>
+
+"Formatting XML baby https://vim.fandom.com/wiki/Pretty-formatting_XML
+com! FormatXML :%!python3 -c "import xml.dom.minidom, sys; print(xml.dom.minidom.parse(sys.stdin).toprettyxml())"
+"nnoremap = :FormatXML<Cr>
+
+" Ripgrep integration from https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
+if executable("rg")
+  let g:ackprg = 'rg --vimgrep --smart-case --hidden'
+endif
