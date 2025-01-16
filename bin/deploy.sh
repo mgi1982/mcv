@@ -46,6 +46,8 @@ install_git_repos() {
         git clone --depth=1 https://github.com/johngrib/vim-game-code-break.git
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
+        git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
+        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
@@ -272,7 +274,6 @@ install_binaries() {
         PAMAC[mycli]=mycli-git
         PAMAC[spotify]=spotify
         PAMAC[insync]=insync
-        PAMAC[signal-desktop-beta]=signal-desktop-beta-bin
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
         PAMAC[zeal]=zeal
