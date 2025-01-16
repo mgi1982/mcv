@@ -327,11 +327,15 @@ bind_dotfiles() {
         done
     fi
 
-    echo "Fixing .ssh permissions"
-    chmod 0600 $HOME/.ssh/*
+    if [ -d .ssh ] ; then
+        echo "Fixing .ssh permissions"
+        chmod 0600 $HOME/.ssh/*
+    fi
 
-    echo "Fixing .gnupg permissions"
-    chmod 0700 .gnupg
+    if [ -d .gnupg ] ; then
+        echo "Fixing .gnupg permissions"
+        chmod 0700 .gnupg
+    fi
 }
 
 BRANCH=dev
