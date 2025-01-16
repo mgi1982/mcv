@@ -91,6 +91,7 @@ if [[ "Darwin" == `uname -s` ]] ; then
         [ -s "/usr/local/opt/nvm/nvm.sh"  ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
         [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
     fi
+    # binding different terminal's escape codes (iterm2, terminal, konsole, etc) to previous and backward words
     bindkey -e
     bindkey '^[[1;9C' forward-word
     bindkey '^[[1;9D' backward-word
