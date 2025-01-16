@@ -162,7 +162,6 @@ install_binaries() {
         if [[ $(uname -a | grep Kali) ]] ; then
             echo "Kali linux, we skip other programs"
             APT[ansible]=ansible-core
-            APT[gimp]=gimp
         else
             echo "Classic debian/ubuntu"
             APT[kubectl]=kubectl
@@ -177,6 +176,7 @@ install_binaries() {
             APT[brave]=brave-bin
             APT[spotify]=spotify
             APT[ansible]=ansible
+            APT[gimp]=gimp
         fi
         APT[mc]=mc
         APT[ncdu]=ncdu
