@@ -15,10 +15,8 @@ try
     source ~/.vim_local/matchit.vim
 
     "Themes
-    "source ~/.vim_local/themes/Tomorrow-Night.vim
-    "source ~/.vim_local/themes/Tomorrow-Night-Blue.vim
-    "source ~/.vim_local/themes/Tomorrow-Night-Bright.vim
-    "source ~/.vim_local/themes/Tomorrow-Night-Eighties.vim
+    source ~/.vim_local/themes/Tomorrow-Night.vim
+    colorscheme Tomorrow-Night
 catch
     "No .vim_local, no problem
 endtry
@@ -70,9 +68,6 @@ nnoremap <M-J> :res +2
 nnoremap <M-K> :res -2
 nnoremap <M-L> :vertical resize +2
 nnoremap <M-H> :vertical resize -2
-
-syntax on
-colorscheme elflord
 
 "Paint red background over column 80
 highlight 120s ctermbg=red 
