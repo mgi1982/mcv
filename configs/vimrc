@@ -6,7 +6,6 @@ source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
 try
-    source ~/.vim_local/vim-commentary/plugin/commentary.vim
     "source ~/.vim_local/wordpress.vim
     source ~/.vim_local/indent/2spaces.vim
     source ~/.vim_local/drupal.vim
