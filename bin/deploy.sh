@@ -137,7 +137,6 @@ install_binaries() {
         CASK[lando]=lando
         CASK[rectangle]=rectangle
         CASK[signal]=signal
-        CASK[slack]=slack
         CASK[discord]=discord
         CASK[gimp]=gimp
         CASK[basecamp]=basecamp
@@ -169,7 +168,6 @@ install_binaries() {
             APT[helm]=helm
             APT[firefox-developer-edition]=firefox-developer-edition
             APT[signal-desktop]=signal-desktop
-            APT[slack]=slack-desktop
             APT[lando]=lando
             APT[zoom]=zoom
             APT[discord]=discord
@@ -270,7 +268,6 @@ install_binaries() {
         done
         [[ ! -z "${TOINSTALL}" ]] && sudo pacman -Sy --noconfirm ${TOINSTALL}
         declare -A PAMAC
-        PAMAC[slack]=slack-desktop
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
         PAMAC[lando]=lando-bin
