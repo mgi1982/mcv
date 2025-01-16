@@ -285,7 +285,7 @@ install_binaries() {
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
-        PAMAC[tsh]=teleport
+        PAMAC[tsh]=teleport-bin
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
