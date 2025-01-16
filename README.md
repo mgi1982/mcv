@@ -2,4 +2,4 @@
 
 Deploy scripts to setup local envs
 
-!(MCV)[./mcv.jpg]
+![MCV](./mcv.jpg)
