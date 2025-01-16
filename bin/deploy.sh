@@ -20,7 +20,7 @@ install_git_repos() {
     echo About to install git repos
     cd $HOME
     if [ ! -f "$HOME/.mcv/.git/index" ] ; then
-        git clone --depth=1 -b $BRANCH git@github.com:mgi1982/mcv.git $HOME/.mcv
+        git clone --depth=1 -b $BRANCH https://github.com/mgi1982/mcv.git $HOME/.mcv
     fi
     if [ ! -f "$HOME/.oh-my-zsh/.git/index" ] ; then
         echo "Installing oh-my-zsh"
@@ -147,8 +147,8 @@ install_binaries() {
         CASK[microsoft-remote-desktop]=microsoft-remote-desktop
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
-        CASK[responsively]=responsively
         CASK[utm]=utm
+        CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
