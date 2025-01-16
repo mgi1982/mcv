@@ -45,16 +45,9 @@ function! HLNext (blinktime)
     redraw
 endfunction
 
-"Autocompletion via ctags+YCM
-try
-    set tags=./local.tags;~
-    let g:ycm_collect_identifiers_from_tags_files = 1
-catch
-endtry
-
 "Folding initialization
-"set foldmethod=syntax
-"set foldcolumn=1
+set foldmethod=syntax
+set foldcolumn=1
 let javaScript_fold=1
 set foldlevelstart=99
 
@@ -63,10 +56,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-nnoremap <m-J> :res +2
-nnoremap <m-K> :res -2
-nnoremap <m-L> :vertical resize +2
-nnoremap <m-H> :vertical resize -2
+nnoremap <M-J> :res +2
+nnoremap <M-K> :res -2
+nnoremap <M-L> :vertical resize +2
+nnoremap <M-H> :vertical resize -2
 
 syntax on
 
