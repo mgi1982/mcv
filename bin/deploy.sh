@@ -137,7 +137,6 @@ install_binaries() {
         CASK[lando]=lando
         CASK[rectangle]=rectangle
         CASK[signal]=signal
-        CASK[discord]=discord
         CASK[gimp]=gimp
         CASK[basecamp]=basecamp
         CASK[maccy]=maccy
@@ -174,7 +173,6 @@ install_binaries() {
             APT[signal-desktop]=signal-desktop
             APT[lando]=lando
             APT[zoom]=zoom
-            APT[discord]=discord
             APT[insync]=insync
             APT[gitui]=gitui
             APT[brave]=brave-bin
@@ -254,7 +252,6 @@ install_binaries() {
         PACMAN[helm]=helm
         PACMAN[mogrify]=imagemagick
         PACMAN[ansible]=ansible
-        PACMAN[discord]=discord
         PACMAN[gitui]=gitui
         PACMAN[xsel]=xsel
         PACMAN[figlet]=figlet
