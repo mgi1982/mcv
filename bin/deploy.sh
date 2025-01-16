@@ -146,7 +146,7 @@ install_binaries() {
         CASK[zoom]=zoom
         CASK[alfred]=alfred
         CASK[buttercup]=buttercup
-        CASK[microsoft-remote-desktop]=microsoft-remote-desktop
+        CASK[windows-app]=windows-app
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
         CASK[utm]=utm
