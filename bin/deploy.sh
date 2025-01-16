@@ -42,7 +42,7 @@ install_git_repos() {
         cd $HOME/.vim_runtime/my_plugins
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         if [[ $(uname -a | grep Kali) ]] ; then
-            sudo apt install -y golang cmake
+            sudo apt install -y golang make
         fi
         cd YouCompleteMe
         git submodule update --init --recursive
