@@ -5,13 +5,24 @@ source ~/.vim_runtime/vimrcs/filetypes.vim
 source ~/.vim_runtime/vimrcs/plugins_config.vim
 source ~/.vim_runtime/vimrcs/extended.vim
 
-source ~/.vim_local/vim-commentary/plugin/commentary.vim
-"source ~/.vim_local/wordpress.vim
-source ~/.vim_local/indent/2spaces.vim
-source ~/.vim_local/drupal.vim
-source ~/.vim_local/js.vim
+try
+    source ~/.vim_local/vim-commentary/plugin/commentary.vim
+    "source ~/.vim_local/wordpress.vim
+    source ~/.vim_local/indent/2spaces.vim
+    source ~/.vim_local/drupal.vim
+    source ~/.vim_local/js.vim
+    call pathogen#infect('~/.vim_local/bundle/{}')
 
-call pathogen#infect('~/.vim_local/bundle/{}')
+    source ~/.vim_local/matchit.vim
+
+    "Themes
+    "source ~/.vim_local/themes/Tomorrow-Night.vim
+    "source ~/.vim_local/themes/Tomorrow-Night-Blue.vim
+    "source ~/.vim_local/themes/Tomorrow-Night-Bright.vim
+    "source ~/.vim_local/themes/Tomorrow-Night-Eighties.vim
+catch
+    "No .vim_local, no problem
+endtry
 
 " set clipboard=unnamed "share clipboard with osx
 set clipboard^=unnamed,unnamedplus
@@ -62,14 +73,6 @@ nnoremap <M-L> :vertical resize +2
 nnoremap <M-H> :vertical resize -2
 
 syntax on
-
-source ~/.vim_local/matchit.vim
-
-"Themes
-"source ~/.vim_local/themes/Tomorrow-Night.vim
-"source ~/.vim_local/themes/Tomorrow-Night-Blue.vim
-"source ~/.vim_local/themes/Tomorrow-Night-Bright.vim
-"source ~/.vim_local/themes/Tomorrow-Night-Eighties.vim
 colorscheme elflord
 
 "Paint red background over column 80
