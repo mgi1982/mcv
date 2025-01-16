@@ -206,7 +206,7 @@ install_binaries() {
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
         done
-        sudo apt install -y ${TOAPT}
+        [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
     else
         declare -A PACMAN
         PACMAN[mc]=mc
@@ -256,7 +256,7 @@ install_binaries() {
         for i in "${!PACMAN[@]}" ; do
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
-        sudo pacman -Sy --noconfirm ${TOINSTALL}
+        [[ ! -z "${TOINSTALL}" ]] && sudo pacman -Sy --noconfirm ${TOINSTALL}
         declare -A PAMAC
         PAMAC[slack]=slack-desktop
         PAMAC[brave]=brave-bin
@@ -275,7 +275,7 @@ install_binaries() {
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
         done
-        pamac build --no-confirm ${TOBUILD}
+        [[ ! -z "${TOINSTALL}" ]] && pamac build --no-confirm ${TOBUILD}
     fi
 }
 
