@@ -152,6 +152,9 @@ install_binaries() {
         CASK[utm]=utm
         CASK[dash]=dash
         CASK[ferdium]=ferdium
+        CASK[zed]=zed
+        CASK[localsend]=localsend-bin
+        CASK[tsh]=teleport
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -258,7 +261,7 @@ install_binaries() {
         PACMAN[yq]=yq
         PACMAN[go]=go
         PACMAN[element-desktop]=element-desktop
-        PACMAN[xfreerdp]=freerdp
+        PACMAN[xfreerdp3]=freerdp
         PACMAN[obsidian]=obsidian
         PACMAN[ksnip]=ksnip
         PACMAN[patch]=patch
@@ -282,6 +285,7 @@ install_binaries() {
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
+        PAMAC[tsh]=teleport
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
