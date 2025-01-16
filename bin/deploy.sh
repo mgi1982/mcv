@@ -280,6 +280,7 @@ install_binaries() {
         PAMAC[imgcat]=imgcat
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
+        PAMAC[localsend]=localsend-bin
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
