@@ -73,7 +73,7 @@ if [[ "Darwin" == `uname -s` ]] ; then
     fi
     export PATH="$BREW_PATH:$PATH"
 fi
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.mcv/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
