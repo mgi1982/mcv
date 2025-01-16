@@ -140,7 +140,7 @@ install_binaries() {
         CASK[discord]=discord
         CASK[gimp]=gimp
         CASK[basecamp]=basecamp
-        CASK[clipy]=clipy
+        CASK[maccy]=maccy
         CASK[calibre]=calibre
         CASK[spotify]=spotify
         CASK[zoom]=zoom
