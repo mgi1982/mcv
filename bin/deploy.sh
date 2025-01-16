@@ -49,7 +49,7 @@ install_git_repos() {
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
-            sudo pacman -Sy cmake
+            sudo pacman -Sy cmake go
         fi
         cd YouCompleteMe
         git submodule update --init --recursive
