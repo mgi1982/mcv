@@ -137,6 +137,8 @@ install_binaries() {
         CASK[microsoft-remote-desktop]=microsoft-remote-desktop
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
+        CASK[responsively]=responsively
+        CASK[utm]=utm
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -275,44 +277,51 @@ install_binaries() {
 
 bind_normal() {
     cd $HOME
-    ls -1 "$PRIMARY_SYNC_FOLDER" | grep -v dotfiles | while read i
-    do
-        if [ ! -L "$i" ] ; then
-            if [ -d "$i" ] ; then
-                sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
+
+    if [ -d "$PRIMARY_SYNC_FOLDER" ] ; then
+        ls -1 "$PRIMARY_SYNC_FOLDER" | grep -v dotfiles | while read i
+        do
+            if [ ! -L "$i" ] ; then
+                if [ -d "$i" ] ; then
+                    sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
+                fi
+                echo "Binding $i"
+                ln -s "$PRIMARY_SYNC_FOLDER/$i"
             fi
-            echo "Binding $i"
-            ln -s "$PRIMARY_SYNC_FOLDER/$i"
-        fi
-    done
-    ls -1 "$SECONDARY_SYNC_FOLDER" | grep -v dotfiles | while read i
-    do
-        if [ ! -L "$i" ] ; then
-            if [ -d "$i" ] ; then
-                echo sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
+        done
+    fi
+    if [ -d "$SECONDARY_SYNC_FOLDER" ] ; then
+        ls -1 "$SECONDARY_SYNC_FOLDER" | grep -v dotfiles | while read i
+        do
+            if [ ! -L "$i" ] ; then
+                if [ -d "$i" ] ; then
+                    echo sudo mv "$i" "$i.bak-$(date +%Y%m%d)"
+                fi
+                echo "Binding $i"
+                ln -s "$SECONDARY_SYNC_FOLDER/$i"
             fi
-            echo "Binding $i"
-            ln -s "$SECONDARY_SYNC_FOLDER/$i"
-        fi
-    done
+        done
+    fi
 }
 
 bind_dotfiles() {
     cd $HOME
-    ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles" | while read i
-    do
-        echo entraste a $i
-        if [ ! -L ".$i" ] ; then
-            if [ -f ".$i" ] ; then
-                sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+    if [ -d "$SECONDARY_SYNC_FOLDER" ] ; then
+        ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles" | while read i
+        do
+            echo entraste a $i
+            if [ ! -L ".$i" ] ; then
+                if [ -f ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                if [ -d ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                echo "Binding $i to .$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" ".$i"
             fi
-            if [ -d ".$i" ] ; then
-                sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
-            fi
-            echo "Binding $i to .$i"
-            ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" ".$i"
-        fi
-    done
+        done
+    fi
 
     echo "Fixing .ssh permissions"
     chmod 0600 $HOME/.ssh/*
@@ -345,16 +354,10 @@ do
 done
 
 if [ ! -d "$PRIMARY_SYNC_FOLDER" ] ; then
-    echo "$PRIMARY_SYNC_FOLDER is not a valid directory"
-    echo
-    echo "Please provide a valid primary directory to sync"
-    exit 1
+    echo "Primary sync folder not defined, skip not binding"
 fi
 if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
-    echo "$SECONDARY_SYNC_FOLDER is not a valid directory"
-    echo
-    echo "Please provide a valid secondary directory to sync"
-    exit 2
+    echo "Secondary sync folder not defined, skip not binding"
 fi
 
 upgrade_bash
