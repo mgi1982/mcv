@@ -47,7 +47,6 @@ install_git_repos() {
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
-        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         if [[ $(uname -a | grep Kali) ]] ; then
             sudo apt install -y golang cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
@@ -56,6 +55,7 @@ install_git_repos() {
         cd YouCompleteMe
         git submodule update --init --recursive
         python3 install.py --ts-completer --go-completer
+        mv /tmp/ycmd-1/ycmd/completers/vue $HOME/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycmd/completers/
         GNAME="$USER"
         if [[ "Darwin" == $(uname -s) ]] ; then
             GNAME="staff"
@@ -124,6 +124,7 @@ install_binaries() {
         BREW[figlet]=figlet
         BREW[yq]=yq
         BREW[pbzip2]=pbzip2
+        BREW[delta]=git-delta
         for i in "${!BREW[@]}" ; do
             which -s "$i" 1> /dev/null || TOBREW="${TOBREW} ${BREW[$i]}"
         done
@@ -136,7 +137,6 @@ install_binaries() {
         CASK[lando]=lando
         CASK[rectangle]=rectangle
         CASK[signal]=signal
-        CASK[slack]=slack
         CASK[discord]=discord
         CASK[gimp]=gimp
         CASK[basecamp]=basecamp
@@ -150,7 +150,6 @@ install_binaries() {
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
         CASK[utm]=utm
-        CASK[delta]=git-delta
         CASK[dash]=dash
         for i in "${!CASK[@]}"
         do
@@ -169,7 +168,6 @@ install_binaries() {
             APT[helm]=helm
             APT[firefox-developer-edition]=firefox-developer-edition
             APT[signal-desktop]=signal-desktop
-            APT[slack]=slack-desktop
             APT[lando]=lando
             APT[zoom]=zoom
             APT[discord]=discord
@@ -270,18 +268,18 @@ install_binaries() {
         done
         [[ ! -z "${TOINSTALL}" ]] && sudo pacman -Sy --noconfirm ${TOINSTALL}
         declare -A PAMAC
-        PAMAC[slack]=slack-desktop
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
         PAMAC[lando]=lando-bin
         PAMAC[mycli]=mycli-git
-        PAMAC[spotify]=spotify
         PAMAC[insync]=insync
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
         PAMAC[zeal]=zeal
         PAMAC[buttercup]=buttercup-desktop
         PAMAC[imgcat]=imgcat
+        PAMAC[ferdium]=ferdium
+        PAMAC[zed]=zed
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
@@ -333,7 +331,7 @@ bind_dotfiles() {
                     sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
                 fi
                 echo "Binding $i to .$i"
-                ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" ".$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/dotfiles/$i" "$HOME/.$i"
             fi
         done
     fi
@@ -345,7 +343,24 @@ bind_dotfiles() {
 
     if [ -d .gnupg ] ; then
         echo "Fixing .gnupg permissions"
-        chmod 0700 .gnupg
+        chmod 0700 $HOME/.gnupg
+    fi
+
+    if [ -d .config/zed ] ; then
+        echo "Binding ZED files"
+        ls -1 "$PRIMARY_SYNC_FOLDER/zed" | while read i
+        do
+            if [ ! -L ".$i" ] ; then
+                if [ -f ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                if [ -d ".$i" ] ; then
+                    sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
+                fi
+                echo "Binding $i to .config/zed/$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/zed/$i" "$HOME/.config/zed/$i"
+            fi
+        done
     fi
 }
 
@@ -374,6 +389,9 @@ done
 
 if [ ! -d "$PRIMARY_SYNC_FOLDER" ] ; then
     echo "Primary sync folder not defined, skip binding"
+else
+    PRIMARY_SYNC_FOLDER="$(readlink -f $PRIMARY_SYNC_FOLDER)"
+    echo "Using $PRIMARY_SYNC_FOLDER as primary sync folder"
 fi
 if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
     echo "Secondary sync folder not defined, skip binding"
