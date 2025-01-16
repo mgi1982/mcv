@@ -362,8 +362,8 @@ fi
 
 upgrade_bash
 install_node
-install_binaries
 install_git_repos
+install_binaries
 
 bind_normal
 bind_dotfiles
