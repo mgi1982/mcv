@@ -47,10 +47,14 @@ install_git_repos() {
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
-        if [[ $(uname -a | grep Kali) ]] ; then
-            sudo apt install -y golang cmake vim-nox
-        elif [[ $(uname -a | grep MANJARO) ]] ; then
-            sudo pacman -Sy --noconfirm cmake go make base-devel
+        if ! which cmake ; then
+            if [[ $(uname -a | grep Kali) ]] ; then
+                sudo apt install -y golang cmake vim-nox
+            elif [[ $(uname -a | grep MANJARO) ]] ; then
+                sudo pacman -Sy --noconfirm cmake go make base-devel
+            elif [[ "Darwin" == $(uname -s) ]] ; then
+                brew install cmake
+            fi
         fi
         cd YouCompleteMe
         git submodule update --init --recursive
