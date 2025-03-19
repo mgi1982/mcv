@@ -157,7 +157,6 @@ install_binaries() {
         CASK[ferdium]=ferdium
         CASK[zed]=zed
         CASK[localsend-bin]=localsend
-        CASK[tsh]=teleport
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -286,7 +285,6 @@ install_binaries() {
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
-        PAMAC[tsh]=teleport-bin
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
