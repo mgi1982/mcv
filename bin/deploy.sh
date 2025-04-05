@@ -16,6 +16,55 @@ upgrade_bash() {
         fi
     fi
 }
+
+install_rosetta() {
+    if [[ "Darwin" == $(uname -s) ]] ; then
+        if ! pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto 2> /dev/null; then
+            echo Installing Rosetta 2
+            sudo softwareupdate --install-rosetta --agree-to-license
+        fi
+    fi
+}
+
+install_python3() {
+    if [[ "Darwin" == $(uname -s) ]] ; then
+        if which python3 | grep '/usr/bin' ; then
+            echo You are using built in Python, reinstalling with Homebrew
+            brew install python
+        fi
+    fi
+}
+
+install_cmake() {
+    if ! which cmake ; then
+        echo Installing CMAKE
+        if [[ $(uname -a | grep Kali) ]] ; then
+            sudo apt install -y cmake vim-nox
+        elif [[ $(uname -a | grep MANJARO) ]] ; then
+            sudo pacman -Sy --noconfirm cmake make base-devel
+        elif [[ "Darwin" == $(uname -s) ]] ; then
+            brew install cmake
+        fi
+    else
+        echo CMAKE present, skipping
+    fi
+}
+
+install_go() {
+    if ! which go ; then
+        echo Installing Go
+        if [[ $(uname -a | grep Kali) ]] ; then
+            sudo apt install -y golang
+        elif [[ $(uname -a | grep MANJARO) ]] ; then
+            sudo pacman -Sy --noconfirm go
+        elif [[ "Darwin" == $(uname -s) ]] ; then
+            brew install go
+        fi
+    else
+        echo Go present, skipping
+    fi
+}
+
 install_git_repos() {
     echo About to install git repos
     cd $HOME
@@ -47,11 +96,6 @@ install_git_repos() {
         git clone --depth=1 https://github.com/majutsushi/tagbar.git
         git clone --depth=1 https://github.com/ycm-core/YouCompleteMe.git
         git clone --depth=1 -b yaml https://github.com/puremourning/ycmd-1.git /tmp/ycmd-1
-        if [[ $(uname -a | grep Kali) ]] ; then
-            sudo apt install -y golang cmake vim-nox
-        elif [[ $(uname -a | grep MANJARO) ]] ; then
-            sudo pacman -Sy --noconfirm cmake go make base-devel
-        fi
         cd YouCompleteMe
         git submodule update --init --recursive
         python3 install.py --ts-completer --go-completer
@@ -153,7 +197,6 @@ install_binaries() {
         CASK[ferdium]=ferdium
         CASK[zed]=zed
         CASK[localsend-bin]=localsend
-        CASK[tsh]=teleport
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -282,7 +325,6 @@ install_binaries() {
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
-        PAMAC[tsh]=teleport-bin
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
@@ -402,7 +444,11 @@ fi
 
 upgrade_bash
 install_node
+install_python3
+install_cmake
+install_go
 install_git_repos
+install_rosetta
 install_binaries
 
 bind_normal
