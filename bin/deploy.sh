@@ -316,7 +316,7 @@ install_binaries() {
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
         PAMAC[lando]=lando-bin
-        PAMAC[mycli]=mycli-git
+        PAMAC[mycli]=mycli
         PAMAC[insync]=insync
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
