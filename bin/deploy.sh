@@ -312,6 +312,7 @@ install_binaries() {
         PACMAN[patch]=patch
         PACMAN[make]=make
         PACMAN[delta]=git-delta
+        PACMAN[keepassxc]=keepassxc
         for i in "${!PACMAN[@]}" ; do
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
@@ -320,17 +321,16 @@ install_binaries() {
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
         PAMAC[lando]=lando-bin
-        PAMAC[mycli]=mycli-git
+        PAMAC[mycli]=mycli
         PAMAC[insync]=insync
         PAMAC[icdiff]=icdiff
         PAMAC[zoom]=zoom
         PAMAC[zeal]=zeal
-        PAMAC[buttercup]=buttercup-desktop
         PAMAC[imgcat]=imgcat
         PAMAC[ferdium]=ferdium
         PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
-        PAMAC[tsh]=teleport
+        PAMAC[syncthing]=syncthing
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
