@@ -190,7 +190,6 @@ install_binaries() {
         CASK[spotify]=spotify
         CASK[zoom]=zoom
         CASK[alfred]=alfred
-        CASK[buttercup]=buttercup
         CASK[windows-app]=windows-app
         CASK[obsidian]=obsidian
         CASK[responsively]=responsively
@@ -199,6 +198,8 @@ install_binaries() {
         CASK[ferdium]=ferdium
         CASK[zed]=zed
         CASK[localsend-bin]=localsend
+        CASK[chromium]=eloston-chromium
+        CASK[keepassxc]=keepassxc
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
