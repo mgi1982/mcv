@@ -286,7 +286,6 @@ install_binaries() {
         PACMAN[host]=dnsutils
         PACMAN[smplayer]=smplayer
         PACMAN[shellcheck]=shellcheck
-        PACMAN[firefox-developer-edition]=firefox-developer-edition
         PACMAN[glances]=glances
         PACMAN[calibre]=calibre
         PACMAN[yt-dlp]=yt-dlp
@@ -317,6 +316,7 @@ install_binaries() {
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
         [[ ! -z "${TOINSTALL}" ]] && sudo pacman -Sy --noconfirm ${TOINSTALL}
+        pamac upgrade --no-confirm --aur --force-refresh
         declare -A PAMAC
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
@@ -328,9 +328,10 @@ install_binaries() {
         PAMAC[zeal]=zeal
         PAMAC[imgcat]=imgcat
         PAMAC[ferdium]=ferdium
-        PAMAC[zed]=zed
         PAMAC[localsend]=localsend-bin
         PAMAC[syncthing]=syncthing
+        PAMAC[zed]=zed
+        PAMAC[chromium]=ungoogled-chromium-bin
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
