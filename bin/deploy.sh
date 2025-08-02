@@ -42,6 +42,8 @@ install_cmake() {
             sudo apt install -y cmake vim-nox
         elif [[ $(uname -a | grep MANJARO) ]] ; then
             sudo pacman -Sy --noconfirm cmake make base-devel
+        elif [[ -f /etc/gentoo-release ]] ; then
+            sudo emerge cmake
         elif [[ "Darwin" == $(uname -s) ]] ; then
             brew install cmake
         fi
@@ -57,6 +59,8 @@ install_go() {
             sudo apt install -y golang
         elif [[ $(uname -a | grep MANJARO) ]] ; then
             sudo pacman -Sy --noconfirm go
+        elif [[ -f /etc/gentoo-release ]] ; then
+            sudo emerge go
         elif [[ "Darwin" == $(uname -s) ]] ; then
             brew install go
         fi
@@ -188,7 +192,6 @@ install_binaries() {
         CASK[alfred]=alfred
         CASK[windows-app]=windows-app
         CASK[obsidian]=obsidian
-        CASK[responsively]=responsively
         CASK[utm]=utm
         CASK[dash]=dash
         CASK[ferdium]=ferdium
@@ -234,7 +237,6 @@ install_binaries() {
         APT[git-crypt]=git-crypt
         APT[terminator]=terminator
         APT[unzip]=unzip
-        APT[cmake]=cmake
         APT[git-lfs]=git-lfs
         APT[jq]=jq
         APT[route]=net-tools
@@ -254,12 +256,61 @@ install_binaries() {
         APT[figlet]=figlet
         APT[yq]=yq
         APT[ksnip]=ksnip
-        APT[go]=golang
         APT[delta]=git-delta
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
         done
         [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
+    elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
+        declare -A EMERGE
+        EMERGE[kubectl]=kubectl
+        EMERGE[helm]=helm
+        EMERGE[firefox-developer-edition]=firefox-developer-edition
+        EMERGE[signal-desktop]=signal-desktop
+        EMERGE[lando]=lando
+        EMERGE[zoom]=zoom
+        EMERGE[insync]=insync
+        EMERGE[gitui]=gitui
+        EMERGE[brave]=brave-bin
+        EMERGE[spotify]=spotify
+        EMERGE[ansible]=ansible
+        EMERGE[gimp]=gimp
+        EMERGE[mc]=mc
+        EMERGE[ncdu]=ncdu
+        EMERGE[xclip]=xclip
+        EMERGE[htop]=htop
+        EMERGE[axel]=axel
+        EMERGE[vim]=vim
+        EMERGE[tmux]=tmux
+        EMERGE[bat]=bat
+        EMERGE[rg]=ripgrep
+        EMERGE[git-crypt]=git-crypt
+        EMERGE[terminator]=terminator
+        EMERGE[unzip]=unzip
+        EMERGE[git-lfs]=git-lfs
+        EMERGE[jq]=jq
+        EMERGE[route]=net-tools
+        EMERGE[host]=dnsutils
+        EMERGE[smplayer]=smplayer
+        EMERGE[shellcheck]=shellcheck
+        EMERGE[glances]=glances
+        EMERGE[calibre]=calibre
+        EMERGE[yt-dlp]=yt-dlp
+        EMERGE[locate]=mlocate
+        EMERGE[gdb]=gdb
+        EMERGE[inotifywait]=inotify-tools
+        EMERGE[mogrify]=imagemagick
+        EMERGE[gron]=gron
+        EMERGE[mycli]=mycli
+        EMERGE[icdiff]=icdiff
+        EMERGE[figlet]=figlet
+        EMERGE[yq]=yq
+        EMERGE[ksnip]=ksnip
+        EMERGE[delta]=git-delta
+        for i in "${!EMERGE[@]}" ; do
+            which "$i" 1> /dev/null || TOEMERGE="${TOEMERGE} ${EMERGE[$i]}"
+        done
+        [[ ! -z "${TOEMERGE}" ]] && sudo emerge ${TOEMERGE}
     else
         declare -A PACMAN
         PACMAN[mc]=mc
@@ -274,7 +325,6 @@ install_binaries() {
         PACMAN[git-crypt]=git-crypt
         PACMAN[terminator]=terminator
         PACMAN[unzip]=unzip
-        PACMAN[cmake]=cmake
         PACMAN[git-lfs]=git-lfs
         PACMAN[jq]=jq
         PACMAN[route]=net-tools
