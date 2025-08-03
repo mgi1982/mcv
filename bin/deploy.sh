@@ -293,6 +293,10 @@ install_binaries() {
             sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
             sudo emerge --sync brave-overlay
         fi
+        if ! eselect repository list -i | grep guru ; then
+            sudo eselect repository add guru
+            sudo emerge --sync guru
+        fi
         declare -A EMERGE
         EMERGE[kubectl]=kubectl
         EMERGE[helm]=app-admin/helm
