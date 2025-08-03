@@ -275,12 +275,10 @@ install_binaries() {
         APT[gdb]=gdb
         APT[inotifywait]=inotify-tools
         APT[mogrify]=imagemagick
-        APT[gron]=gron
         APT[mycli]=mycli
         APT[icdiff]=icdiff
         APT[figlet]=figlet
         APT[yq]=yq
-        APT[ksnip]=ksnip
         APT[delta]=git-delta
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
@@ -330,12 +328,10 @@ install_binaries() {
         EMERGE[gdb]=gdb
         EMERGE[inotifywait]=inotify-tools
         EMERGE[mogrify]=imagemagick
-        EMERGE[gron]=gron
         EMERGE[mycli]=mycli
         EMERGE[icdiff]=icdiff
         EMERGE[figlet]=figlet
         EMERGE[yq]=yq
-        EMERGE[ksnip]=ksnip
         EMERGE[delta]=git-delta
         for i in "${!EMERGE[@]}" ; do
             which "$i" 1> /dev/null || TOEMERGE="${TOEMERGE} ${EMERGE[$i]}"
@@ -380,7 +376,6 @@ install_binaries() {
         PACMAN[element-desktop]=element-desktop
         PACMAN[xfreerdp3]=freerdp
         PACMAN[obsidian]=obsidian
-        PACMAN[ksnip]=ksnip
         PACMAN[patch]=patch
         PACMAN[make]=make
         PACMAN[delta]=git-delta
