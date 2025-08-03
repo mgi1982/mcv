@@ -245,7 +245,6 @@ install_binaries() {
         APT[bat]=bat
         APT[rg]=ripgrep
         APT[git-crypt]=git-crypt
-        APT[terminator]=terminator
         APT[unzip]=unzip
         APT[git-lfs]=git-lfs
         APT[jq]=jq
@@ -294,7 +293,6 @@ install_binaries() {
         EMERGE[bat]=bat
         EMERGE[rg]=ripgrep
         EMERGE[git-crypt]=git-crypt
-        EMERGE[terminator]=terminator
         EMERGE[unzip]=unzip
         EMERGE[git-lfs]=dev-vcs/git-lfs
         EMERGE[jq]=app-misc/jq
@@ -332,7 +330,6 @@ install_binaries() {
         PACMAN[rg]=ripgrep
         PACMAN[ncdu]=ncdu
         PACMAN[git-crypt]=git-crypt
-        PACMAN[terminator]=terminator
         PACMAN[unzip]=unzip
         PACMAN[git-lfs]=git-lfs
         PACMAN[jq]=jq
