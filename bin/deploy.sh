@@ -298,19 +298,25 @@ install_binaries() {
             sudo emerge --sync brave-overlay
         fi
         declare -A EMERGE
+        if [[ "$HEADLESS" = false ]] ; then
+            EMERGE[signal-desktop]=signal-desktop-bin
+            EMERGE[zoom]=net-im/zoom
+            EMERGE[insync]=insync
+            EMERGE[brave]=brave-bin
+            EMERGE[spotify]=spotify
+            EMERGE[gimp]=gimp
+            EMERGE[xclip]=x11-misc/xclip
+            EMERGE[smplayer]=smplayer
+            EMERGE[calibre]=calibre
+        else
+            echo "Skipping UI programs"
+        fi
         EMERGE[kubectl]=kubectl
         EMERGE[helm]=app-admin/helm
-        EMERGE[signal-desktop]=signal-desktop-bin
-        EMERGE[zoom]=net-im/zoom
-        EMERGE[insync]=insync
         EMERGE[gitui]=gitui
-        EMERGE[brave]=brave-bin
-        EMERGE[spotify]=spotify
         EMERGE[ansible]=ansible
-        EMERGE[gimp]=gimp
         EMERGE[mc]=app-misc/mc
         EMERGE[ncdu]=ncdu
-        EMERGE[xclip]=x11-misc/xclip
         EMERGE[htop]=htop
         EMERGE[axel]=axel
         EMERGE[vim]=vim
@@ -323,10 +329,8 @@ install_binaries() {
         EMERGE[jq]=app-misc/jq
         EMERGE[route]=net-tools
         EMERGE[host]=bind-tools
-        EMERGE[smplayer]=smplayer
         EMERGE[shellcheck]=shellcheck
         EMERGE[glances]=glances
-        EMERGE[calibre]=calibre
         EMERGE[yt-dlp]=yt-dlp
         EMERGE[locate]=mlocate
         EMERGE[gdb]=gdb
@@ -497,6 +501,7 @@ bind_dotfiles() {
 }
 
 BRANCH=dev
+HEADLESS=false
 
 while [[ $# -gt 0 ]]
 do
@@ -512,6 +517,10 @@ do
             ;;
         -b|--branch)
             BRANCH="$2"
+            shift
+            ;;
+        -h|--headless)
+            HEADLESS=true
             shift
             ;;
     esac
