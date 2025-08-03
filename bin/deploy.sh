@@ -17,6 +17,17 @@ upgrade_bash() {
     fi
 }
 
+install_zsh() {
+    if ! which zsh ; then
+        echo Installing zsh
+        if [[ -f /etc/gentoo-release ]] ; then
+            sudo emerge zsh
+        fi
+    else
+        echo Go present, skipping
+    fi
+}
+
 install_rosetta() {
     if [[ "Darwin" == $(uname -s) ]] ; then
         if ! pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto 2> /dev/null; then
@@ -214,7 +225,6 @@ install_binaries() {
             echo "Classic debian/ubuntu"
             APT[kubectl]=kubectl
             APT[helm]=helm
-            APT[firefox-developer-edition]=firefox-developer-edition
             APT[signal-desktop]=signal-desktop
             APT[lando]=lando
             APT[zoom]=zoom
@@ -264,20 +274,19 @@ install_binaries() {
     elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
         declare -A EMERGE
         EMERGE[kubectl]=kubectl
-        EMERGE[helm]=helm
-        EMERGE[firefox-developer-edition]=firefox-developer-edition
+        EMERGE[helm]=app-admin/helm
         EMERGE[signal-desktop]=signal-desktop
         EMERGE[lando]=lando
-        EMERGE[zoom]=zoom
+        EMERGE[zoom]=net-im/zoom
         EMERGE[insync]=insync
         EMERGE[gitui]=gitui
         EMERGE[brave]=brave-bin
         EMERGE[spotify]=spotify
         EMERGE[ansible]=ansible
         EMERGE[gimp]=gimp
-        EMERGE[mc]=mc
+        EMERGE[mc]=apps-misc/mc
         EMERGE[ncdu]=ncdu
-        EMERGE[xclip]=xclip
+        EMERGE[xclip]=z11-misc/xclip
         EMERGE[htop]=htop
         EMERGE[axel]=axel
         EMERGE[vim]=vim
@@ -287,8 +296,8 @@ install_binaries() {
         EMERGE[git-crypt]=git-crypt
         EMERGE[terminator]=terminator
         EMERGE[unzip]=unzip
-        EMERGE[git-lfs]=git-lfs
-        EMERGE[jq]=jq
+        EMERGE[git-lfs]=dev-vcs/git-lfs
+        EMERGE[jq]=app-misc/jq
         EMERGE[route]=net-tools
         EMERGE[host]=dnsutils
         EMERGE[smplayer]=smplayer
@@ -494,6 +503,7 @@ if [ ! -d "$SECONDARY_SYNC_FOLDER" ] ; then
 fi
 
 upgrade_bash
+install_zsh
 install_node
 install_python3
 install_cmake
