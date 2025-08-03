@@ -37,6 +37,23 @@ install_rosetta() {
     fi
 }
 
+install_gron() {
+    if ! which gron ; then
+        echo Installing gron
+        if uname -a | grep aarch64 ; then
+            GRON_TGZ=gron-linux-arm64-0.7.1.tgz
+        else
+            GRON_TGZ=gron-linux-amd64-0.7.1.tgz
+        fi
+        wget https://github.com/tomnomnom/gron/releases/download/v0.7.1/$GRON_TGZ
+        tar xvzf $GRON_TGZ
+        sudo mv gron /usr/local/bin
+        rm $GRON_TGZ
+    else
+        echo gron present, skipping
+    fi
+}
+
 install_python3() {
     if [[ "Darwin" == $(uname -s) ]] ; then
         if which python3 | grep '/usr/bin' ; then
@@ -270,6 +287,14 @@ install_binaries() {
         done
         [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
     elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
+        if ! eselect repository list -i | grep ppfeufer ; then
+            sudo eselect repository add ppfeufer-gentoo-overlay
+            sudo emerge --sync ppfeufer-gentoo-overlay
+        fi
+        if ! eselect repository list -i | grep brave ; then
+            sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+            sudo emerge --sync brave-overlay
+        fi
         declare -A EMERGE
         EMERGE[kubectl]=kubectl
         EMERGE[helm]=app-admin/helm
@@ -513,6 +538,7 @@ install_cmake
 install_go
 install_git_repos
 install_rosetta
+install_gron
 install_binaries
 install_lando
 
