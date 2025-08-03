@@ -318,7 +318,7 @@ install_binaries() {
         EMERGE[git-lfs]=dev-vcs/git-lfs
         EMERGE[jq]=app-misc/jq
         EMERGE[route]=net-tools
-        EMERGE[host]=dnsutils
+        EMERGE[host]=bind-tools
         EMERGE[smplayer]=smplayer
         EMERGE[shellcheck]=shellcheck
         EMERGE[glances]=glances
