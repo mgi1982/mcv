@@ -285,7 +285,7 @@ install_binaries() {
         EMERGE[gimp]=gimp
         EMERGE[mc]=apps-misc/mc
         EMERGE[ncdu]=ncdu
-        EMERGE[xclip]=z11-misc/xclip
+        EMERGE[xclip]=x11-misc/xclip
         EMERGE[htop]=htop
         EMERGE[axel]=axel
         EMERGE[vim]=vim
