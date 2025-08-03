@@ -226,7 +226,6 @@ install_binaries() {
             APT[kubectl]=kubectl
             APT[helm]=helm
             APT[signal-desktop]=signal-desktop
-            APT[lando]=lando
             APT[zoom]=zoom
             APT[insync]=insync
             APT[gitui]=gitui
@@ -274,8 +273,7 @@ install_binaries() {
         declare -A EMERGE
         EMERGE[kubectl]=kubectl
         EMERGE[helm]=app-admin/helm
-        EMERGE[signal-desktop]=signal-desktop
-        EMERGE[lando]=lando
+        EMERGE[signal-desktop]=signal-desktop-bin
         EMERGE[zoom]=net-im/zoom
         EMERGE[insync]=insync
         EMERGE[gitui]=gitui
@@ -283,7 +281,7 @@ install_binaries() {
         EMERGE[spotify]=spotify
         EMERGE[ansible]=ansible
         EMERGE[gimp]=gimp
-        EMERGE[mc]=apps-misc/mc
+        EMERGE[mc]=app-misc/mc
         EMERGE[ncdu]=ncdu
         EMERGE[xclip]=x11-misc/xclip
         EMERGE[htop]=htop
@@ -370,7 +368,6 @@ install_binaries() {
         declare -A PAMAC
         PAMAC[brave]=brave-bin
         PAMAC[zoom]=zoom
-        PAMAC[lando]=lando-bin
         PAMAC[mycli]=mycli
         PAMAC[insync]=insync
         PAMAC[icdiff]=icdiff
@@ -389,6 +386,15 @@ install_binaries() {
         [[ ! -z "${TOBUILD}" ]] && yes | pamac build --no-confirm ${TOBUILD}
     fi
     echo
+}
+
+install_lando() {
+    if ! which lando ; then
+        echo Installing Lando for web development!
+        bash -c "$(curl -fsSL https://get.lando.dev/setup-lando.sh)"
+    else
+        echo Lando present, skipping
+    fi
 }
 
 bind_normal() {
@@ -508,6 +514,7 @@ install_go
 install_git_repos
 install_rosetta
 install_binaries
+install_lando
 
 bind_normal
 bind_dotfiles
