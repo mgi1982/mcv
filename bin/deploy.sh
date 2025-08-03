@@ -285,6 +285,10 @@ install_binaries() {
         done
         [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
     elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
+        if ! eselect repository list -i | grep guru ; then
+            sudo eselect repository enable guru
+            sudo emerge --sync guru
+        fi
         if ! eselect repository list -i | grep ppfeufer ; then
             sudo eselect repository add ppfeufer-gentoo-overlay
             sudo emerge --sync ppfeufer-gentoo-overlay
@@ -292,10 +296,6 @@ install_binaries() {
         if ! eselect repository list -i | grep brave ; then
             sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
             sudo emerge --sync brave-overlay
-        fi
-        if ! eselect repository list -i | grep guru ; then
-            sudo eselect repository add guru
-            sudo emerge --sync guru
         fi
         declare -A EMERGE
         EMERGE[kubectl]=kubectl
