@@ -285,6 +285,10 @@ install_binaries() {
         done
         [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
     elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
+        if ! eselect repository list -i | grep pf4public ; then
+            sudo eselect repository enable pf4public
+            sudo emerge --sync pf4public
+        fi
         if ! eselect repository list -i | grep guru ; then
             sudo eselect repository enable guru
             sudo emerge --sync guru
@@ -304,13 +308,16 @@ install_binaries() {
         declare -A EMERGE
         if [[ "$HEADLESS" = false ]] ; then
             EMERGE[brave]=brave-bin
+            EMERGE[chromium]=ungoogled-chromium
             EMERGE[calibre]=calibre
             EMERGE[gimp]=gimp
-            EMERGE[insync]=insync
             EMERGE[signal-desktop]=signal-desktop-bin
             EMERGE[smplayer]=smplayer
             EMERGE[spotify]=spotify
             EMERGE[xclip]=x11-misc/xclip
+            EMERGE[xsel]=xsel
+            EMERGE[zeal]=zeal
+            EMERGE[zed]=zed
             EMERGE[zoom]=net-im/zoom
         else
             echo "Skipping UI programs"
@@ -330,9 +337,11 @@ install_binaries() {
         EMERGE[htop]=htop
         EMERGE[icdiff]=icdiff
         EMERGE[inotifywait]=inotify-tools
+        EMERGE[insync]=insync
         EMERGE[jq]=app-misc/jq
         EMERGE[kubectl]=kubectl
         EMERGE[locate]=mlocate
+        EMERGE[localsend]=localsend
         EMERGE[mc]=app-misc/mc
         EMERGE[mogrify]=imagemagick
         EMERGE[mycli]=mycli
@@ -340,6 +349,7 @@ install_binaries() {
         EMERGE[rg]=ripgrep
         EMERGE[route]=net-tools
         EMERGE[shellcheck]=shellcheck
+        EMERGE[syncthing]=syncthing
         EMERGE[tmux]=tmux
         EMERGE[unzip]=unzip
         EMERGE[vim]=vim
