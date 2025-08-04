@@ -434,7 +434,7 @@ install_binaries() {
 }
 
 install_lando() {
-    if ! which lando ; then
+    if [[ ! -d $HOME/.lando ]] ; then
         echo Installing Lando for web development!
         bash -c "$(curl -fsSL https://get.lando.dev/setup-lando.sh)"
     else
@@ -473,7 +473,7 @@ bind_normal() {
 
 bind_dotfiles() {
     cd $HOME
-    if [ -d "$SECONDARY_SYNC_FOLDER" ] ; then
+    if [ -d "$PRIMARY_SYNC_FOLDER" ] ; then
         ls -1 "$PRIMARY_SYNC_FOLDER/dotfiles" | while read i
         do
             if [ ! -L ".$i" ] ; then
