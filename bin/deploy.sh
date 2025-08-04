@@ -166,67 +166,67 @@ install_binaries() {
     echo Setting up binary programs
     if [[ "Darwin" == $(uname -s) ]] ; then
         declare -A BREW
-        BREW[rg]=ripgrep
-        BREW[watch]=watch
-        BREW[mc]=mc
-        BREW[htop]=htop
-        BREW[axel]=axel
         BREW[/opt/homebrew/bin/vim]=vim
-        BREW[wget]=wget
+        BREW[axel]=axel
         BREW[bat]=bat
-        BREW[ncdu]=ncdu
         BREW[cmake]=cmake
-        BREW[openconnect]=openconnect
-        BREW[git-crypt]=git-crypt
-        BREW[glances]=glances
-        BREW[gron]=gron
-        BREW[gpg]=gnupg
-        BREW[icdiff]=icdiff
-        BREW[yt-dlp]=yt-dlp
-        BREW[locate]=mlocate
-        BREW[go]=go
-        BREW[jq]=jq
-        BREW[shellcheck]=shellcheck
-        BREW[git-lfs]=git-lfs
-        BREW[grpcurl]=grpcurl
-        BREW[mogrify]=imagemagick
-        BREW[kubectl]=kubectl
-        BREW[helm]=helm
-        BREW[tmux]=tmux
-        BREW[gitui]=gitui
-        BREW[mplayer]=mplayer
-        BREW[figlet]=figlet
-        BREW[yq]=yq
-        BREW[pbzip2]=pbzip2
         BREW[delta]=git-delta
+        BREW[figlet]=figlet
+        BREW[git-crypt]=git-crypt
+        BREW[git-lfs]=git-lfs
+        BREW[gitui]=gitui
+        BREW[glances]=glances
+        BREW[go]=go
+        BREW[gpg]=gnupg
+        BREW[gron]=gron
+        BREW[grpcurl]=grpcurl
+        BREW[helm]=helm
+        BREW[htop]=htop
+        BREW[icdiff]=icdiff
+        BREW[jq]=jq
+        BREW[kubectl]=kubectl
+        BREW[locate]=mlocate
+        BREW[mc]=mc
+        BREW[mogrify]=imagemagick
+        BREW[mplayer]=mplayer
+        BREW[ncdu]=ncdu
+        BREW[openconnect]=openconnect
+        BREW[pbzip2]=pbzip2
+        BREW[rg]=ripgrep
+        BREW[shellcheck]=shellcheck
+        BREW[tmux]=tmux
+        BREW[watch]=watch
+        BREW[wget]=wget
+        BREW[yq]=yq
+        BREW[yt-dlp]=yt-dlp
         for i in "${!BREW[@]}" ; do
             which -s "$i" 1> /dev/null || TOBREW="${TOBREW} ${BREW[$i]}"
         done
         [[ ! -z "${TOBREW}" ]] && brew install ${TOBREW}
         declare -A CASK
-        CASK[iterm2]=iterm2
-        CASK[insync]=insync
-        CASK[itsycal]=itsycal
-        CASK[brave-browser]=brave-browser
-        CASK[lando]=lando
-        CASK[rectangle]=rectangle
-        CASK[signal]=signal
-        CASK[gimp]=gimp
-        CASK[basecamp]=basecamp
-        CASK[maccy]=maccy
-        CASK[calibre]=calibre
-        CASK[spotify]=spotify
-        CASK[zoom]=zoom
         CASK[alfred]=alfred
-        CASK[windows-app]=windows-app
-        CASK[obsidian]=obsidian
-        CASK[utm]=utm
+        CASK[basecamp]=basecamp
+        CASK[brave-browser]=brave-browser
+        CASK[calibre]=calibre
+        CASK[chromium]=eloston-chromium
         CASK[dash]=dash
         CASK[ferdium]=ferdium
-        CASK[zed]=zed
-        CASK[localsend-bin]=localsend
-        CASK[chromium]=eloston-chromium
+        CASK[gimp]=gimp
+        CASK[insync]=insync
+        CASK[iterm2]=iterm2
+        CASK[itsycal]=itsycal
         CASK[keepassxc]=keepassxc
+        CASK[lando]=lando
+        CASK[localsend-bin]=localsend
+        CASK[maccy]=maccy
+        CASK[obsidian]=obsidian
+        CASK[rectangle]=rectangle
+        CASK[signal]=signal
+        CASK[spotify]=spotify
+        CASK[utm]=utm
+        CASK[windows-app]=windows-app
+        CASK[zed]=zed
+        CASK[zoom]=zoom
         for i in "${!CASK[@]}"
         do
             brew list --cask | grep "$i" 1> /dev/null || TOCASK="${TOCASK} ${CASK[$i]}"
@@ -240,46 +240,46 @@ install_binaries() {
             APT[ansible]=ansible-core
         else
             echo "Classic debian/ubuntu"
-            APT[kubectl]=kubectl
-            APT[helm]=helm
-            APT[signal-desktop]=signal-desktop
-            APT[zoom]=zoom
-            APT[insync]=insync
-            APT[gitui]=gitui
-            APT[brave]=brave-bin
-            APT[spotify]=spotify
             APT[ansible]=ansible
+            APT[brave]=brave-bin
             APT[gimp]=gimp
+            APT[gitui]=gitui
+            APT[helm]=helm
+            APT[insync]=insync
+            APT[kubectl]=kubectl
+            APT[signal-desktop]=signal-desktop
+            APT[spotify]=spotify
+            APT[zoom]=zoom
         fi
-        APT[mc]=mc
-        APT[ncdu]=ncdu
-        APT[xclip]=xclip
-        APT[htop]=htop
         APT[axel]=axel
-        APT[vim]=vim
-        APT[tmux]=tmux
         APT[bat]=bat
-        APT[rg]=ripgrep
-        APT[git-crypt]=git-crypt
-        APT[unzip]=unzip
-        APT[git-lfs]=git-lfs
-        APT[jq]=jq
-        APT[route]=net-tools
-        APT[host]=dnsutils
-        APT[smplayer]=smplayer
-        APT[shellcheck]=shellcheck
-        APT[glances]=glances
         APT[calibre]=calibre
-        APT[yt-dlp]=yt-dlp
-        APT[locate]=mlocate
+        APT[delta]=git-delta
+        APT[figlet]=figlet
         APT[gdb]=gdb
+        APT[git-crypt]=git-crypt
+        APT[git-lfs]=git-lfs
+        APT[glances]=glances
+        APT[host]=dnsutils
+        APT[htop]=htop
+        APT[icdiff]=icdiff
         APT[inotifywait]=inotify-tools
+        APT[jq]=jq
+        APT[locate]=mlocate
+        APT[mc]=mc
         APT[mogrify]=imagemagick
         APT[mycli]=mycli
-        APT[icdiff]=icdiff
-        APT[figlet]=figlet
+        APT[ncdu]=ncdu
+        APT[rg]=ripgrep
+        APT[route]=net-tools
+        APT[shellcheck]=shellcheck
+        APT[smplayer]=smplayer
+        APT[tmux]=tmux
+        APT[unzip]=unzip
+        APT[vim]=vim
+        APT[xclip]=xclip
         APT[yq]=yq
-        APT[delta]=git-delta
+        APT[yt-dlp]=yt-dlp
         for i in "${!APT[@]}" ; do
             which "$i" 1> /dev/null || TOAPT="${TOAPT} ${APT[$i]}"
         done
@@ -288,6 +288,10 @@ install_binaries() {
         if ! eselect repository list -i | grep guru ; then
             sudo eselect repository enable guru
             sudo emerge --sync guru
+        fi
+        if ! eselect repository list -i | grep haskell ; then
+            sudo eselect repository enable haskell
+            sudo emerge --sync haskell
         fi
         if ! eselect repository list -i | grep ppfeufer ; then
             sudo eselect repository add ppfeufer-gentoo-overlay
@@ -299,95 +303,95 @@ install_binaries() {
         fi
         declare -A EMERGE
         if [[ "$HEADLESS" = false ]] ; then
-            EMERGE[signal-desktop]=signal-desktop-bin
-            EMERGE[zoom]=net-im/zoom
-            EMERGE[insync]=insync
             EMERGE[brave]=brave-bin
-            EMERGE[spotify]=spotify
-            EMERGE[gimp]=gimp
-            EMERGE[xclip]=x11-misc/xclip
-            EMERGE[smplayer]=smplayer
             EMERGE[calibre]=calibre
+            EMERGE[gimp]=gimp
+            EMERGE[insync]=insync
+            EMERGE[signal-desktop]=signal-desktop-bin
+            EMERGE[smplayer]=smplayer
+            EMERGE[spotify]=spotify
+            EMERGE[xclip]=x11-misc/xclip
+            EMERGE[zoom]=net-im/zoom
         else
             echo "Skipping UI programs"
         fi
-        EMERGE[kubectl]=kubectl
-        EMERGE[helm]=app-admin/helm
-        EMERGE[gitui]=gitui
         EMERGE[ansible]=ansible
-        EMERGE[mc]=app-misc/mc
-        EMERGE[ncdu]=ncdu
-        EMERGE[htop]=htop
         EMERGE[axel]=axel
-        EMERGE[vim]=vim
-        EMERGE[tmux]=tmux
         EMERGE[bat]=bat
-        EMERGE[rg]=ripgrep
-        EMERGE[git-crypt]=git-crypt
-        EMERGE[unzip]=unzip
-        EMERGE[git-lfs]=dev-vcs/git-lfs
-        EMERGE[jq]=app-misc/jq
-        EMERGE[route]=net-tools
-        EMERGE[host]=bind-tools
-        EMERGE[shellcheck]=shellcheck
-        EMERGE[glances]=glances
-        EMERGE[yt-dlp]=yt-dlp
-        EMERGE[locate]=mlocate
+        EMERGE[delta]=git-delta
+        EMERGE[figlet]=figlet
         EMERGE[gdb]=gdb
+        EMERGE[git-crypt]=git-crypt
+        EMERGE[git-lfs]=dev-vcs/git-lfs
+        EMERGE[gitui]=gitui
+        EMERGE[glances]=glances
+        EMERGE[helm]=app-admin/helm
+        EMERGE[host]=bind-tools
+        EMERGE[htop]=htop
+        EMERGE[icdiff]=icdiff
         EMERGE[inotifywait]=inotify-tools
+        EMERGE[jq]=app-misc/jq
+        EMERGE[kubectl]=kubectl
+        EMERGE[locate]=mlocate
+        EMERGE[mc]=app-misc/mc
         EMERGE[mogrify]=imagemagick
         EMERGE[mycli]=mycli
-        EMERGE[icdiff]=icdiff
-        EMERGE[figlet]=figlet
+        EMERGE[ncdu]=ncdu
+        EMERGE[rg]=ripgrep
+        EMERGE[route]=net-tools
+        EMERGE[shellcheck]=shellcheck
+        EMERGE[tmux]=tmux
+        EMERGE[unzip]=unzip
+        EMERGE[vim]=vim
         EMERGE[yq]=yq
-        EMERGE[delta]=git-delta
+        EMERGE[yt-dlp]=yt-dlp
         for i in "${!EMERGE[@]}" ; do
             which "$i" 1> /dev/null || TOEMERGE="${TOEMERGE} ${EMERGE[$i]}"
         done
         [[ ! -z "${TOEMERGE}" ]] && sudo emerge ${TOEMERGE}
     else
         declare -A PACMAN
-        PACMAN[mc]=mc
-        PACMAN[xclip]=xclip
-        PACMAN[htop]=htop
-        PACMAN[axel]=axel
-        PACMAN[vim]=gvim
-        PACMAN[tmux]=tmux
-        PACMAN[bat]=bat
-        PACMAN[rg]=ripgrep
-        PACMAN[ncdu]=ncdu
-        PACMAN[git-crypt]=git-crypt
-        PACMAN[unzip]=unzip
-        PACMAN[git-lfs]=git-lfs
-        PACMAN[jq]=jq
-        PACMAN[route]=net-tools
-        PACMAN[host]=dnsutils
-        PACMAN[smplayer]=smplayer
-        PACMAN[shellcheck]=shellcheck
-        PACMAN[glances]=glances
-        PACMAN[calibre]=calibre
-        PACMAN[yt-dlp]=yt-dlp
-        PACMAN[gimp]=gimp
-        PACMAN[locate]=mlocate
-        PACMAN[gdb]=gdb
-        PACMAN[signal-desktop]=signal-desktop
-        PACMAN[inotifywait]=inotify-tools
-        PACMAN[kubectl]=kubectl
-        PACMAN[helm]=helm
-        PACMAN[mogrify]=imagemagick
         PACMAN[ansible]=ansible
-        PACMAN[gitui]=gitui
-        PACMAN[xsel]=xsel
-        PACMAN[figlet]=figlet
-        PACMAN[yq]=yq
-        PACMAN[go]=go
+        PACMAN[axel]=axel
+        PACMAN[bat]=bat
+        PACMAN[calibre]=calibre
+        PACMAN[delta]=git-delta
         PACMAN[element-desktop]=element-desktop
-        PACMAN[xfreerdp3]=freerdp
+        PACMAN[figlet]=figlet
+        PACMAN[gdb]=gdb
+        PACMAN[gimp]=gimp
+        PACMAN[git-crypt]=git-crypt
+        PACMAN[git-lfs]=git-lfs
+        PACMAN[gitui]=gitui
+        PACMAN[glances]=glances
+        PACMAN[go]=go
+        PACMAN[helm]=helm
+        PACMAN[host]=dnsutils
+        PACMAN[htop]=htop
+        PACMAN[inotifywait]=inotify-tools
+        PACMAN[jq]=jq
+        PACMAN[keepassxc]=keepassxc
+        PACMAN[kubectl]=kubectl
+        PACMAN[locate]=mlocate
+        PACMAN[make]=make
+        PACMAN[mc]=mc
+        PACMAN[mogrify]=imagemagick
+        PACMAN[ncdu]=ncdu
         PACMAN[obsidian]=obsidian
         PACMAN[patch]=patch
-        PACMAN[make]=make
-        PACMAN[delta]=git-delta
-        PACMAN[keepassxc]=keepassxc
+        PACMAN[rg]=ripgrep
+        PACMAN[route]=net-tools
+        PACMAN[shellcheck]=shellcheck
+        PACMAN[signal-desktop]=signal-desktop
+        PACMAN[smplayer]=smplayer
+        PACMAN[tmux]=tmux
+        PACMAN[unzip]=unzip
+        PACMAN[vim]=gvim
+        PACMAN[xclip]=xclip
+        PACMAN[xfreerdp3]=freerdp
+        PACMAN[xsel]=xsel
+        PACMAN[yq]=yq
+        PACMAN[yt-dlp]=yt-dlp
         for i in "${!PACMAN[@]}" ; do
             which $i 1> /dev/null || TOINSTALL="${TOINSTALL} ${PACMAN[$i]}"
         done
@@ -395,18 +399,17 @@ install_binaries() {
         pamac upgrade --no-confirm --aur --force-refresh
         declare -A PAMAC
         PAMAC[brave]=brave-bin
-        PAMAC[zoom]=zoom
-        PAMAC[mycli]=mycli
-        PAMAC[insync]=insync
-        PAMAC[icdiff]=icdiff
-        PAMAC[zoom]=zoom
-        PAMAC[zeal]=zeal
-        PAMAC[imgcat]=imgcat
-        PAMAC[ferdium]=ferdium
-        PAMAC[localsend]=localsend-bin
-        PAMAC[syncthing]=syncthing
-        PAMAC[zed]=zed
         PAMAC[chromium]=ungoogled-chromium-bin
+        PAMAC[ferdium]=ferdium
+        PAMAC[icdiff]=icdiff
+        PAMAC[imgcat]=imgcat
+        PAMAC[insync]=insync
+        PAMAC[localsend]=localsend-bin
+        PAMAC[mycli]=mycli
+        PAMAC[syncthing]=syncthing
+        PAMAC[zeal]=zeal
+        PAMAC[zed]=zed
+        PAMAC[zoom]=zoom
         for i in "${!PAMAC[@]}"
         do
             which "$i" > /dev/null 2>&1 || TOBUILD="$TOBUILD ${PAMAC[$i]}"
@@ -521,7 +524,6 @@ do
             ;;
         -h|--headless)
             HEADLESS=true
-            shift
             ;;
     esac
 
