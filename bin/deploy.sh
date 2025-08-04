@@ -285,6 +285,10 @@ install_binaries() {
         done
         [[ ! -z "${TOAPT}" ]] && sudo apt install -y ${TOAPT}
     elif [[ -f '/usr/bin/emerge' ]] ; then # gentoo
+        if ! eselect repository list -i | grep gentoo-zh ; then
+            sudo eselect repository enable gentoo-zh
+            sudo emerge --sync gentoo-zh
+        fi
         if ! eselect repository list -i | grep pf4public ; then
             sudo eselect repository enable pf4public
             sudo emerge --sync pf4public
@@ -311,6 +315,8 @@ install_binaries() {
             EMERGE[chromium]=ungoogled-chromium
             EMERGE[calibre]=calibre
             EMERGE[gimp]=gimp
+            EMERGE[insync]=insync
+            EMERGE[localsend]=localsend-bin
             EMERGE[signal-desktop]=signal-desktop-bin
             EMERGE[smplayer]=smplayer
             EMERGE[spotify]=spotify
@@ -337,11 +343,9 @@ install_binaries() {
         EMERGE[htop]=htop
         EMERGE[icdiff]=icdiff
         EMERGE[inotifywait]=inotify-tools
-        EMERGE[insync]=insync
         EMERGE[jq]=app-misc/jq
         EMERGE[kubectl]=kubectl
         EMERGE[locate]=mlocate
-        EMERGE[localsend]=localsend
         EMERGE[mc]=app-misc/mc
         EMERGE[mogrify]=imagemagick
         EMERGE[mycli]=mycli
