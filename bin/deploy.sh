@@ -32,7 +32,7 @@ install_git() {
     if ! which git; then
         echo Installing git
         if [[ -f /etc/gentoo-release ]] ; then
-            sudo emerge git
+            sudo emerge dev-vcs/git
         fi
     else
         echo Git present, skipping
