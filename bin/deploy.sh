@@ -28,6 +28,17 @@ install_zsh() {
     fi
 }
 
+install_git() {
+    if ! which zsh ; then
+        echo Installing git
+        if [[ -f /etc/gentoo-release ]] ; then
+            sudo emerge git
+        fi
+    else
+        echo Git present, skipping
+    fi
+}
+
 install_rosetta() {
     if [[ "Darwin" == $(uname -s) ]] ; then
         if ! pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto 2> /dev/null; then
@@ -570,6 +581,7 @@ fi
 
 upgrade_bash
 install_zsh
+install_git
 install_node
 install_python3
 install_cmake
