@@ -29,7 +29,7 @@ install_zsh() {
 }
 
 install_git() {
-    if ! which zsh ; then
+    if ! which git; then
         echo Installing git
         if [[ -f /etc/gentoo-release ]] ; then
             sudo emerge git
@@ -109,6 +109,7 @@ install_go() {
 }
 
 install_git_repos() {
+    install_git
     echo About to install git repos
     cd $HOME
     if [ ! -f "$HOME/.mcv/.git/index" ] ; then
@@ -581,7 +582,6 @@ fi
 
 upgrade_bash
 install_zsh
-install_git
 install_node
 install_python3
 install_cmake
