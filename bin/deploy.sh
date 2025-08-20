@@ -302,8 +302,12 @@ install_binaries() {
             sudo emerge --sync haskell
         fi
         if ! eselect repository list -i | grep ppfeufer ; then
-            sudo eselect repository add ppfeufer-gentoo-overlay
+            sudo eselect repository enable ppfeufer-gentoo-overlay
             sudo emerge --sync ppfeufer-gentoo-overlay
+        fi
+        if ! eselect repository list -i | grep djs_overlay ; then
+            sudo eselect repository enable djs_overlay
+            sudo emerge --sync djs_overlay
         fi
         if ! eselect repository list -i | grep brave ; then
             sudo eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
@@ -314,16 +318,18 @@ install_binaries() {
             EMERGE[brave]=brave-bin
             EMERGE[chromium]=ungoogled-chromium
             EMERGE[calibre]=calibre
+            EMERGE[feridium]=ferdium-bin
             EMERGE[gimp]=gimp
             EMERGE[insync]=insync
             EMERGE[localsend]=localsend-bin
+            EMERGE[obsidian]=obsidian
             EMERGE[signal-desktop]=signal-desktop-bin
             EMERGE[smplayer]=smplayer
             EMERGE[spotify]=spotify
             EMERGE[xclip]=x11-misc/xclip
             EMERGE[xsel]=xsel
             EMERGE[zeal]=zeal
-            EMERGE[zed]=zed
+            EMERGE[zed]=app-editors/zed
             EMERGE[zoom]=net-im/zoom
         else
             echo "Skipping UI programs"
