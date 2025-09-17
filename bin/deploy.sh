@@ -516,7 +516,7 @@ bind_dotfiles() {
                     sudo mv ".$i" ".$i.bak-$(date +%Y%m%d)"
                 fi
                 echo "Binding $i to .$i"
-                ln -s "$PRIMARY_SYNC_FOLDER/configfiles/$i" "$HOME/.$i"
+                ln -s "$PRIMARY_SYNC_FOLDER/configfiles/$i" "$HOME/.config/$i"
             fi
         done
     fi
