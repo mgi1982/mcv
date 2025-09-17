@@ -225,7 +225,7 @@ install_binaries() {
         CASK[ferdium]=ferdium
         CASK[gimp]=gimp
         CASK[insync]=insync
-        CASK[iterm2]=iterm2
+        CASK[kitty]=kitty
         CASK[itsycal]=itsycal
         CASK[keepassxc]=keepassxc
         CASK[lando]=lando
