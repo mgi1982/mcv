@@ -73,7 +73,7 @@ if [[ "Darwin" == `uname -s` ]] ; then
     fi
     export PATH="$BREW_PATH:$PATH"
 fi
-export PATH="$HOME/bin:$HOME/.mcv/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.lando/bin:$HOME/bin:$HOME/.mcv/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,3 +135,4 @@ if [[ -d "$HOME/.pyenv" ]] ; then
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
+
